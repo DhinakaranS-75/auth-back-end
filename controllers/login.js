@@ -1,9 +1,7 @@
 const User = require("../models/User");
 const bcrypt = require("bcrypt");
-const dotenv = require("dotenv");
 const client = require("../redis");
 const jwt = require("jsonwebtoken");
-dotenv.config();
 
 async function CheckUser(email) {
   try {
@@ -22,7 +20,7 @@ async function AuthenticateUser(email, password) {
     const userCheck = await User.findOne({ email: email });
     const validPassword = await bcrypt.compare(password, userCheck.password);
     if (validPassword) {
-      const token = jwt.sign({ email }, process.env.login_secret_token);
+      const token = jwt.sign({ email }, "asdfgBnmE78963");
       const response = {
         id: userCheck._id,
         name: userCheck.name,
@@ -47,7 +45,7 @@ async function AuthenticateUser(email, password) {
 
 async function AuthorizeUser(token) {
   try {
-    const decodedToken = jwt.verify(token, process.env.login_secret_token);
+    const decodedToken = jwt.verify(token, "asdfgBnmE78963");
     if (decodedToken) {
       const email = decodedToken.email;
       const auth = await client.get(`key-${email}`);

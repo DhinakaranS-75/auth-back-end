@@ -3,9 +3,8 @@ const { sendMail } = require("./SendMail");
 const bcrypt = require("bcrypt");
 const mongoose = require("mongoose");
 const jwt = require("jsonwebtoken");
-const dotenv = require("dotenv");
 const verifyUser = require("../models/verifyUser");
-dotenv.config();
+
 async function InsertVerifyUser(name, email, password) {
   try {
     const salt = await bcrypt.genSalt(10);
@@ -35,7 +34,7 @@ async function InsertVerifyUser(name, email, password) {
 }
 
 function generateToken(email) {
-  const token = jwt.sign(email, process.env.Secret_key);
+  const token = jwt.sign(email, "qwerty789@890");
   return token;
 }
 
