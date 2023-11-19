@@ -1,7 +1,9 @@
 const redis = require("redis");
 
 const redisClient = () => {
-  return redis.createClient();
+  return redis.createClient({
+    url: "rediss://red-cld39ieg1b2c73f3j7b0:xPcllaoPiAvANkh5L4tCchYgsmZKdO1t@oregon-redis.render.com:6379",
+  });
 };
 
 const client = redisClient();
